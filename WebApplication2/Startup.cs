@@ -62,6 +62,7 @@ namespace ProductService
         }
 
         private void OnStarted() {
+            /// When this service ist started, it will request a registry in API gateway service.
             Console.WriteLine("Starting");
             using (HttpClient client = new HttpClient()) {
                 //string data = serverAddressesFeature.Addresses.FirstOrDefault().ToString(); //Kestrel
