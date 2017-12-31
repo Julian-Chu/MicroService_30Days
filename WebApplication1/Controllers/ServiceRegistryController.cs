@@ -7,23 +7,26 @@ namespace APIGateway.Controllers
 {
     [Produces("application/json")]
     [Route("api/ServiceRegistry")]
-    public class ServiceRegistryController : Controller
-    {
+    public class ServiceRegistryController : Controller {
         static List<MicroService> serviceList = new List<MicroService>() {
             new MicroService() { Name="API Gateway", Location="http://localhost:2324" }
         };
         // GET: api/ServiceRegistry
         [HttpGet]
-        public IEnumerable<MicroService> Get()
-        {
+        public IEnumerable<MicroService> Get() {
             return serviceList;
         }
 
         // POST: api/ServiceRegistry
         [HttpPost]
-        public void Post([FromBody]MicroService service)
-        {
+        public void Post([FromBody]MicroService service) {
             serviceList.Add(service);
+        }
+
+        
+        public string PostAsync(string service) {
+            serviceList.Add(new MicroService() { Name=service, Location="RabbitMQ" });
+            return service;
         }
 
         // DELETE: api/ServiceRegistry/{serviceName}

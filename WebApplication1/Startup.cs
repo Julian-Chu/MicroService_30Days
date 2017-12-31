@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace APIGateway
 {
     public class Startup
-    {
+    {        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,7 +21,7 @@ namespace APIGateway
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -45,6 +41,18 @@ namespace APIGateway
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            appLifetime.ApplicationStarted.Register(OnStarted);
+            appLifetime.ApplicationStopped.Register(OnStopped);
+
+        }
+
+        private void OnStopped() {
+            RabbitMQListener.Stop();
+        }
+
+        private void OnStarted() {
+            RabbitMQListener.Start();
         }
     }
 }
