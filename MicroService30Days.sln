@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API gateway", "WebApplication1\API gateway.csproj", "{388F1076-239D-4E90-ADF6-02A514E712BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "WebApplication1\APIGateway.csproj", "{388F1076-239D-4E90-ADF6-02A514E712BA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductService", "WebApplication2\ProductService.csproj", "{09F74D47-1F39-4A80-9010-4961C7D20B30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SayHelloService", "SayHelloService\SayHelloService.csproj", "{714ECA27-2DEA-407D-ABF1-7B2BA7B73C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SayHelloService", "SayHelloService\SayHelloService.csproj", "{714ECA27-2DEA-407D-ABF1-7B2BA7B73C50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 
@@ -12,14 +7,7 @@ namespace APIGateway.Controllers
     [Produces("application/json")]
     [Route("api/SayHello")]
     public class SayHelloController : Controller
-    {
-        // GET: api/SayHello/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        
+    {        
         // POST: api/SayHello
         [HttpPost]
         public string Post([FromQuery]string name)
@@ -44,10 +32,7 @@ namespace APIGateway.Controllers
                         body: body);
                 }
             }
-
             return $"Hello,{name}";
         }
-        
-
     }
 }

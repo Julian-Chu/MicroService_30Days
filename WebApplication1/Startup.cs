@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using APIGateway.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace APIGateway
 {
     public class Startup
     {
+        private static EventingBasicConsumer consumer;
+        private static IConnection connection;
+        private static IModel channel;
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

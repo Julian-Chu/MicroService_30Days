@@ -8,6 +8,11 @@ namespace SayHelloService
     class Program
     {
         static void Main(string[] args) {
+            RegistryInAPIGateway();
+            SubscribeToAPIGateway();
+        }
+
+        private static void SubscribeToAPIGateway() {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel()) {
@@ -34,6 +39,29 @@ namespace SayHelloService
 
                 Console.WriteLine("Pess any key to exit");
                 Console.ReadLine();
+            }
+        }
+
+        private static void RegistryInAPIGateway() {
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+
+            using (var connection = factory.CreateConnection()) {
+                using (var channel = connection.CreateModel()) {
+                    channel.QueueDeclare(
+                        queue: "registry",
+                        exclusive: false,
+                        autoDelete: false,
+                        arguments: null
+                        );
+
+                    string message = "SayHelloService";
+                    var body = Encoding.UTF8.GetBytes(message);
+
+                    channel.BasicPublish(
+                        exchange: "",
+                        routingKey: "registry", basicProperties: null,
+                        body: body);
+                }
             }
         }
     }
