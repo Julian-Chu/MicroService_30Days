@@ -1,14 +1,15 @@
 ﻿using APIGateway.Models;
+using APIGateway.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.Extensions.Configuration;
+using Pivotal.Discovery.Client;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace APIGateway
 {
-  public class Startup
+    public class Startup
   {
     public Startup(IHostingEnvironment env)
     {
@@ -29,8 +30,14 @@ namespace APIGateway
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddOptions();
-      services.AddMvc();
+
+      services.AddDiscoveryClient(Configuration);
+
+      services.AddSingleton<IProductService, ProductService>();
+
       services.Configure<ConfigServerData>(Configuration);
+
+      services.AddMvc();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
