@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Pivotal.Discovery.Client;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace APIGateway.Services
     {
         DiscoveryHttpClientHandler _handler;
         ILogger<ProductService> _logger;
-        private const string ProductServiceAPI_URL = "http://ProductService/api/values/5";
+        private const string ProductServiceAPI_URL = "http://ProductService/api/values";
         private const string LocalURL = "http://localhost:1234/api/values/5";
         private const string FortuneURL = "http://fortuneService/api/fortunes/random";
         public ProductService(IDiscoveryClient client, ILoggerFactory logFactory) {
@@ -21,14 +22,22 @@ namespace APIGateway.Services
             _logger = logFactory.CreateLogger<ProductService>();            
         }
 
-        public string GetValue() {
+        public string GetValue(int id) {
             var client = new HttpClient(_handler, false);
-
-
-            var result = client.GetStringAsync(ProductServiceAPI_URL).Result;
+            var result = client.GetStringAsync($"{ProductServiceAPI_URL}/{id}").Result;
             _logger.LogInformation("Get string:{0}", result);
             
             return result;
+        }
+
+        public string[] GetValues() {
+            var client = new HttpClient(_handler, false);
+            var response = client.GetAsync(ProductServiceAPI_URL).Result;
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            _logger.LogInformation("Get string:{0}", responseBody);
+            var result = JsonConvert.DeserializeObject<List<string>>(responseBody);
+
+            return result.ToArray();
         }
     }
 }

@@ -18,12 +18,11 @@ namespace APIGateway
         }
         IProductService _productService;
 
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
+        [HttpGet]
+        public IEnumerable<string> Get() {
 
-        //    return _productService.GetValuesArray();
-        //}
+            return _productService.GetValues();
+        }
 
         //[HttpGet]
         //public Task<string> Get() {
@@ -34,7 +33,7 @@ namespace APIGateway
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id) {
-            return _productService.GetValue();
+            return _productService.GetValue(id);
         }
 
 

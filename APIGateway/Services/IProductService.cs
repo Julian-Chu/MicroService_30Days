@@ -7,6 +7,7 @@ namespace APIGateway.Services
 {
     public interface IProductService
     {
-        string GetValue();
+        string GetValue(int id);
+        string[] GetValues();
     }
 }
