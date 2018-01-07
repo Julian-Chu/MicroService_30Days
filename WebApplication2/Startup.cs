@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.Discovery.Client;
+using Pivotal.Discovery.Client;
 
 namespace ProductService
 {

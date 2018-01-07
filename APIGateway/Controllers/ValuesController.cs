@@ -34,7 +34,7 @@ namespace APIGateway
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id) {
-            return _productService.GetValuesArray();
+            return _productService.GetValue();
         }
 
 

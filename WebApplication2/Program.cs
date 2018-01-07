@@ -11,10 +11,16 @@ namespace ProductService
             BuildWebHost(args).Run();            
         }
 
+        /// <summary>
+        /// With UseUrls("http://localhost:1234"), service discovery can't find the servie, please use UseUrls("http://*:1234")
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:1111")
+                .UseUrls("http://*:1234")
+                //.UseUrls("http://localhost:1234")  
                 .Build();
     }
 }
