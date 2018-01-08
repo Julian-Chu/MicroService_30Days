@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using APIGateway.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APIGateway
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+  [Route("api/[controller]")]
+    public class ProductController : Controller
     {
         // GET: api/values
-        public ValuesController(IProductService service) {
+        public ProductController(IProductService service) {
             _productService = service;
         }
         IProductService _productService;
@@ -23,12 +20,6 @@ namespace APIGateway
 
             return _productService.GetValues();
         }
-
-        //[HttpGet]
-        //public Task<string> Get() {
-
-        //    return _productService.GetValuesArray();
-        //}
 
         // GET api/values/5
         [HttpGet("{id}")]
