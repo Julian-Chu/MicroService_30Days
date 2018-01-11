@@ -12,20 +12,25 @@ namespace APIGateway
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        public ProductsController(GetProductCommand getProductCommand, GetProductsCommand getProductsCommand) {
-            this.productServiceCommand = getProductCommand;
-            this.getProductsCommand = getProductsCommand;
+        // GET: api/values
+        public ProductsController(ProductServiceCommand productServiceCommand) {
+            this.productServiceCommand = productServiceCommand;
         }
-        private readonly GetProductCommand productServiceCommand;
-        private readonly GetProductsCommand getProductsCommand;
+        private readonly ProductServiceCommand productServiceCommand;
 
-        // GET: api/products
-        [HttpGet]
-        public IEnumerable<string> Get() {
-            return getProductsCommand.GetProducts();
-        }
+        //[HttpGet]
+        //public IEnumerable<string> Get() {
 
-        // GET api/poducts/5
+        //    return _productService.GetValues();
+        //}
+
+        //[HttpGet]
+        //public Task<string> Get() {
+
+        //    return _productService.GetValuesArray();
+        //}
+
+        // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id) {
             Console.WriteLine("Execute Get Product");
