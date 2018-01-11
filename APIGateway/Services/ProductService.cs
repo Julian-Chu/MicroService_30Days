@@ -13,8 +13,8 @@ namespace APIGateway.Services
     {
         DiscoveryHttpClientHandler _handler;
         ILogger<ProductService> _logger;
-        private const string ProductServiceAPI_URL = "http://ProductService/api/values";
-        private const string LocalURL = "http://localhost:1234/api/values/5";
+        private const string ProductServiceAPI_URL = "http://ProductService/api/products";
+        private const string LocalURL = "http://localhost:1234/api/products/5";
         private const string FortuneURL = "http://fortuneService/api/fortunes/random";
         public ProductService(IDiscoveryClient client, ILoggerFactory logFactory) {
             _handler = new DiscoveryHttpClientHandler(client,

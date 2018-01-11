@@ -9,11 +9,17 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
     <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0" />
     <PackageReference Include="rabbitMQ.client" Version="5.0.1" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix" Version="1.1.0" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStream" Version="1.1.0" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServer" Version="2.0.0-dev-00198" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Command\" />
   </ItemGroup>
 
 </Project>
