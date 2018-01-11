@@ -10,19 +10,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace APIGateway
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class ProductsController : Controller
     {
         // GET: api/values
-        public ValuesController(IProductService service) {
-            _productService = service;
+        public ProductsController(ProductServiceCommand productServiceCommand) {
+            this.productServiceCommand = productServiceCommand;
         }
-        IProductService _productService;
+        private readonly ProductServiceCommand productServiceCommand;
 
-        [HttpGet]
-        public IEnumerable<string> Get() {
+        //[HttpGet]
+        //public IEnumerable<string> Get() {
 
-            return _productService.GetValues();
-        }
+        //    return _productService.GetValues();
+        //}
 
         //[HttpGet]
         //public Task<string> Get() {
@@ -33,7 +33,8 @@ namespace APIGateway
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id) {
-            return _productService.GetValue(id);
+            Console.WriteLine("Execute Get Product");
+            return productServiceCommand.GetProduct(id);
         }
 
 
