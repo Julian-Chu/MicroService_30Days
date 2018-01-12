@@ -12,29 +12,33 @@ namespace APIGateway
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        // GET: api/values
-        public ProductsController(ProductServiceCommand productServiceCommand) {
-            this.productServiceCommand = productServiceCommand;
-        }
-        private readonly ProductServiceCommand productServiceCommand;
+    private readonly GetProductCommand getProductCommand;
+    private readonly GetProductsCommand getProductsCommand;
 
-        //[HttpGet]
-        //public IEnumerable<string> Get() {
+    // GET: api/values
+    public ProductsController(GetProductCommand getProductCommand, GetProductsCommand getProductsCommand) {
+      this.getProductCommand = getProductCommand;
+      this.getProductsCommand = getProductsCommand;
+    }
 
-        //    return _productService.GetValues();
-        //}
+    [HttpGet]
+    public IEnumerable<string> Get()
+    {
 
-        //[HttpGet]
-        //public Task<string> Get() {
+      return getProductsCommand.GetProducts();
+    }
 
-        //    return _productService.GetValuesArray();
-        //}
+    //[HttpGet]
+    //public Task<string> Get() {
 
-        // GET api/values/5
-        [HttpGet("{id}")]
+    //    return _productService.GetValuesArray();
+    //}
+
+    // GET api/values/5
+    [HttpGet("{id}")]
         public string Get(int id) {
             Console.WriteLine("Execute Get Product");
-            return productServiceCommand.GetProduct(id);
+            return getProductCommand.GetProduct(id);
         }
 
 

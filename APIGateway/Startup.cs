@@ -65,6 +65,7 @@ namespace APIGateway
             appLifetime.ApplicationStarted.Register(OnStarted);
             appLifetime.ApplicationStopped.Register(OnStopped);
 
+            app.UseHystrixRequestContext(); 
             app.UseDiscoveryClient();
             app.UseHystrixMetricsStream();
 
