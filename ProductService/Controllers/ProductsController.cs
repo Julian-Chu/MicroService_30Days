@@ -9,18 +9,18 @@ namespace ProductService.Controllers
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        // GET api/values
+        // GET api/products
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "Product1", "Product2" };
         }
 
-        // GET api/values/5
+        // GET api/product/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return $"Product {id}";
+            return $"Product{id}";
         }
     }
 }

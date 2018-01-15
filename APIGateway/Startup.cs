@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pivotal.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
-using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace APIGateway
 {
@@ -18,8 +17,7 @@ namespace APIGateway
               .SetBasePath(env.ContentRootPath)
               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-              .AddEnvironmentVariables()
-              .AddConfigServer();
+              .AddEnvironmentVariables();
 
             Configuration = builder.Build();
         }
@@ -77,11 +75,11 @@ namespace APIGateway
         }
 
         private void OnStopped() {
-            RabbitMQListener.Stop();
+            //RabbitMQListener.Stop();
         }
 
         private void OnStarted() {
-            RabbitMQListener.Start();
+            //RabbitMQListener.Start();
         }
     }
 }
