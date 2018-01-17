@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pivotal.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
+using Steeltoe.Extensions.Configuration;
 
 namespace APIGateway
 {
@@ -41,8 +42,6 @@ namespace APIGateway
             services.AddHystrixCommand<GetProductsCommand>("ProductsService", Configuration);
 
             services.AddHystrixMetricsStream(Configuration);
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,8 +64,8 @@ namespace APIGateway
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            appLifetime.ApplicationStarted.Register(OnStarted);
-            appLifetime.ApplicationStopped.Register(OnStopped);
+            //appLifetime.ApplicationStarted.Register(OnStarted);
+            //appLifetime.ApplicationStopped.Register(OnStopped);
 
             app.UseDiscoveryClient();
             app.UseHystrixRequestContext();
@@ -74,12 +73,12 @@ namespace APIGateway
 
         }
 
-        private void OnStopped() {
-            //RabbitMQListener.Stop();
-        }
+        //private void OnStopped() {
+        //    //RabbitMQListener.Stop();
+        //}
 
-        private void OnStarted() {
-            //RabbitMQListener.Start();
-        }
+        //private void OnStarted() {
+        //    //RabbitMQListener.Start();
+        //}
     }
 }

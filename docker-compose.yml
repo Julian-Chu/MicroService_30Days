@@ -1,8 +1,43 @@
 version: '3'
 
 services:
-  apigateway:
-    image: apigateway
+  eureka:
+    image: springcloud/eureka:latest
+    container_name: eureka-server
+    depends_on:
+       - "rabbitmq"
+    ports: 
+       - "8761:8761"
+
+  hystrix:
+    image: kennedyoliveira/hystrix-dashboard:latest
+    container_name: hystrix-dashboard
+    depends_on:
+       - "rabbitmq"
+    ports: 
+       - "7979:7979"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports: 
+       - "5672:5672"
+       - "15672:15672"
+
+  productservice:
+    image: productservice:latest
+    container_name: productservice
     build:
-      context: .
-      dockerfile: APIGateway/Dockerfile
+      context: ./productservice
+    depends_on:
+      - "eureka"
+
+  apigateway:
+    image: apigateway:latest
+    container_name: apigateway
+    build:
+      context: ./apigateway
+    depends_on:
+      - "rabbitmq"
+      - "hystrix"
+      
